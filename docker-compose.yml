@@ -1,0 +1,14 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    # Mount project for live edits; keep node_modules from the image with an anonymous volume
+    volumes:
+      - ./:/app:cached
+      - /app/node_modules
+    command: ["npm", "run", "dev", "--", "-H", "0.0.0.0"]
+    tty: true
